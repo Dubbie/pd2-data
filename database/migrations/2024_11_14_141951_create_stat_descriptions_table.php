@@ -25,7 +25,7 @@ return new class extends Migration
             $table->unsignedInteger('value')->default(1);
             $table->unsignedInteger('group')->nullable();
             $table->unsignedInteger('group_function')->nullable();
-            $table->unsignedInteger('group_value')->default(1);
+            $table->unsignedInteger('group_value')->nullable();
             $table->string('group_positive_code')->nullable();
             $table->string('group_negative_code')->nullable();
             $table->string('group_extra_code')->nullable();

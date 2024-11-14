@@ -20,6 +20,8 @@ class Stat extends Model
         'max_stat'
     ];
 
+    protected $with = ['description'];
+
     public function description()
     {
         return $this->hasOne(StatDescription::class, 'stat_name', 'name');

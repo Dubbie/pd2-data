@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('stats', function (Blueprint $table) {
             $table->string('name')->primary();
             $table->unsignedInteger('id');
+            $table->unsignedSmallInteger('val_shift')->nullable();
             $table->boolean('f_min')->default(false);
             $table->unsignedInteger('min_accr')->nullable();
             $table->boolean('is_direct')->default(false);
