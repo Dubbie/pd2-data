@@ -23,7 +23,7 @@ const fetchItems = async (query) => {
     loading.value = true;
 
     try {
-        const response = await axios.get(route('api.item.index'), {
+        const response = await axios.get(route('api.item.unique.index'), {
             params: { query },
             signal: abortController.signal,
         });
@@ -32,7 +32,7 @@ const fetchItems = async (query) => {
         if (axios.isCancel(err)) {
             console.log('Request canceled');
         } else {
-            console.log('Error while loading base items!');
+            console.log('Error while loading unique items!');
             console.log(err);
         }
     } finally {
@@ -58,7 +58,7 @@ onMounted(() => {
 
 <template>
     <AppLayout>
-        <h1 class="font-display text-3xl font-bold">Base items</h1>
+        <h1 class="font-display text-3xl font-bold">Unique items</h1>
 
         <transition
             enter-active-class="transition-all ease-out duration-300"
