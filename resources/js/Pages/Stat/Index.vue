@@ -17,7 +17,9 @@ defineProps({
             <div v-for="stat in stats" :key="stat.name" class="text-sm">
                 <div class="grid grid-cols-3">
                     <div>
-                        <p class="font-display font-bold">{{ stat.name }}</p>
+                        <p class="font-display font-bold text-orange-500">
+                            {{ stat.name }}
+                        </p>
                     </div>
 
                     <div class="col-span-2">
