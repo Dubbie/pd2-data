@@ -21,6 +21,10 @@ abstract class FromFileSeeder extends Seeder
         for ($line = 1; $line < count($properties); $line++) {
             $split = explode("\t", $properties[$line]);
 
+            if ($split[0] === 'Expansion') {
+                continue;
+            }
+
             $property = [];
             foreach ($split as $index => $value) {
                 $header = $headers[$index];

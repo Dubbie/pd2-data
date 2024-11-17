@@ -36,6 +36,12 @@ import { Link } from '@inertiajs/vue3';
                 >
                     Properties
                 </NavLink>
+                <NavLink
+                    :href="route('item.base.index')"
+                    :active="route().current('item.base.*')"
+                >
+                    Base items
+                </NavLink>
             </div>
 
             <div>
