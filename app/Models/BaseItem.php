@@ -48,10 +48,14 @@ class BaseItem extends Model
     // Accessor for attributes field
     public function getAttributesAttribute($value)
     {
-        $itemAttributes = new ItemAttributes($this->category, json_decode($value, true) ?? []);
-        $itemAttributes->mergeWithDefaults(); // Apply default values if needed
+        // Decode the value from JSON (if it's stored as a JSON string)
+        $decodedValue = json_decode($value, true) ?? [];
 
-        return $itemAttributes; // Return the ItemAttributes instance
+        // Create an ItemAttributes instance
+        $itemAttributes = new ItemAttributes($this->category, $decodedValue);
+
+        // Return the attributes as an array or another appropriate format
+        return $itemAttributes->get(); // Return as array
     }
 
     // Mutator for attributes field

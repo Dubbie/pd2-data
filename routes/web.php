@@ -11,3 +11,4 @@ Route::get('/stat', [StatController::class, 'index'])->name('stat.index');
 Route::get('/property', [PropertyController::class, 'index'])->name('property.index');
 
 Route::get('/item/base', [ItemController::class, 'baseItems'])->name('item.base.index');
+Route::get('/item/base/{item}', [ItemController::class, 'showBaseItem'])->name('item.base.show');
