@@ -18,7 +18,7 @@ defineProps({
         class="p-2 text-sm font-semibold"
         :class="{
             'text-white': active,
-            'text-zinc-600 hover:text-white': !active,
+            'text-zinc-500 hover:text-white': !active,
         }"
     >
         <slot />
