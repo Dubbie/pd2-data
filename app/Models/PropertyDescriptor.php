@@ -17,8 +17,15 @@ class PropertyDescriptor extends Model
         'describable_type'
     ];
 
+    protected $with = ['property'];
+
     public function describable()
     {
         return $this->morphTo();
+    }
+
+    public function property()
+    {
+        return $this->belongsTo(Property::class, 'property_code', 'code');
     }
 }

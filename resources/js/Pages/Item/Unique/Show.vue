@@ -6,6 +6,10 @@ defineProps({
         type: Object,
         required: true,
     },
+    modifiers: {
+        type: Array,
+        required: true,
+    },
 });
 </script>
 
@@ -13,6 +17,12 @@ defineProps({
     <AppLayout>
         <h1 class="font-display text-3xl font-bold">{{ item.name }}</h1>
 
+        <p>Modifiers:</p>
+        <code>
+            <pre>{{ modifiers }}</pre>
+        </code>
+
+        <p>Item:</p>
         <code>
             <pre>{{ item }}</pre>
         </code>

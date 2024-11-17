@@ -1,5 +1,5 @@
 <script setup>
-import BaseItem from '@/Components/BaseItem.vue';
+import UniqueItem from '@/Components/UniqueItem.vue';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import { useForm } from '@inertiajs/vue3';
 import { onMounted, ref, watch } from 'vue';
@@ -73,7 +73,7 @@ onMounted(() => {
                 <p>Loading...</p>
             </div>
             <div v-else class="grid grid-cols-6 items-center gap-6">
-                <BaseItem v-for="item in items" :key="item.id" :item="item" />
+                <UniqueItem v-for="item in items" :key="item.id" :item="item" />
             </div>
         </transition>
     </AppLayout>

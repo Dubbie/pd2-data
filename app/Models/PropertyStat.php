@@ -16,6 +16,8 @@ class PropertyStat extends Model
         'property_code'
     ];
 
+    protected $with = ['stat'];
+
     public function property()
     {
         return $this->belongsTo(Property::class, 'property_code', 'code');

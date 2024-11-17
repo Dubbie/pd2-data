@@ -4,10 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\BaseItem;
 use App\Models\UniqueItem;
+use App\Services\Property\PropertyDescriptorManager;
 use Inertia\Inertia;
 
 class ItemController extends Controller
 {
+    protected PropertyDescriptorManager $manager;
+
+    public function __construct(PropertyDescriptorManager $manager)
+    {
+        $this->manager = $manager;
+    }
+
     public function baseItems()
     {
         return Inertia::render('Item/Base/Index');
@@ -27,8 +35,11 @@ class ItemController extends Controller
 
     public function showUniqueItem(UniqueItem $item)
     {
+        $modifiers = $this->manager->processItem($item->baseItem, $item->propertyDescriptors);
+
         return Inertia::render('Item/Unique/Show', [
-            'item' => $item
+            'item' => $item,
+            'modifiers' => $modifiers,
         ]);
     }
 }

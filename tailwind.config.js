@@ -16,6 +16,9 @@ export default {
                 sans: ['"Source Sans 3"', ...defaultTheme.fontFamily.sans],
                 display: ['Raleway', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                unique: 'rgb(165, 146, 99)',
+            },
         },
     },
 
