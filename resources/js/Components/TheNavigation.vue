@@ -30,6 +30,12 @@ import { Link } from '@inertiajs/vue3';
                 >
                     Stats
                 </NavLink>
+                <NavLink
+                    :href="route('property.index')"
+                    :active="route().current('property.*')"
+                >
+                    Properties
+                </NavLink>
             </div>
 
             <div>
