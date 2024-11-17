@@ -7,8 +7,8 @@ use JsonSerializable;
 
 class D2Stat implements JsonSerializable
 {
-    private Stat $stat;
-    private array $values;
+    public Stat $stat;
+    public array $values;
 
     public function __construct(Stat $stat, array $values)
     {

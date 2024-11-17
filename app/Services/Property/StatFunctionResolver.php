@@ -2,9 +2,9 @@
 
 namespace App\Services\Property;
 
-use App\Services\Property\Handlers\DefaultFunctionHandler;
-use App\Services\Property\Handlers\ProcFunctionHandler;
-use App\Services\Property\Handlers\StatFunctionHandlerInterface;
+use App\Services\Property\StatFunctionHandlers\DefaultFunctionHandler;
+use App\Services\Property\StatFunctionHandlers\ProcFunctionHandler;
+use App\Services\Property\StatFunctionHandlers\StatFunctionHandlerInterface;
 
 class StatFunctionResolver
 {

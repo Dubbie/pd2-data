@@ -9,7 +9,8 @@ class StatGroupingHandler
         $standalone = [];
 
         foreach ($processedStats as $stat) {
-            $standalone[] = $stat;
+            $modifier = new D2Modifier($stat->stat->name, [$stat]);
+            $standalone[] = $modifier;
         }
 
         return $standalone;

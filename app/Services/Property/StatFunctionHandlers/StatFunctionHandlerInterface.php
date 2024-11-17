@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Property\Handlers;
+namespace App\Services\Property\StatFunctionHandlers;
 
 use App\Models\PropertyDescriptor;
 use App\Models\PropertyStat;
