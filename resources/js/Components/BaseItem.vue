@@ -18,6 +18,7 @@ defineProps({
             <img
                 :src="`/img/items/${item.inventory_image}.png`"
                 :alt="item.name"
+                loading="lazy"
             />
 
             <p class="mt-1 text-center font-medium">{{ item.name }}</p>
