@@ -5,6 +5,7 @@ namespace App\Services\Property;
 use App\Services\Property\DescFunctionHandlers\DescFunction15Handler;
 use App\Services\Property\DescFunctionHandlers\DescFunction1Handler;
 use App\Services\Property\DescFunctionHandlers\DescFunction2Handler;
+use App\Services\Property\DescFunctionHandlers\DescFunction3Handler;
 use App\Services\Property\DescFunctionHandlers\DescFunctionHandlerInterface;
 use Exception;
 
@@ -17,6 +18,7 @@ class DescFunctionResolver
         $this->handlers = [
             1 => new DescFunction1Handler(),
             2 => new DescFunction2Handler(),
+            3 => new DescFunction3Handler(),
             15 => new DescFunction15Handler(),
         ];
     }
