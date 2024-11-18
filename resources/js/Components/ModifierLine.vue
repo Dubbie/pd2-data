@@ -37,9 +37,18 @@ const translatedTemplate = computed(() => {
                 const minStat = findStatByName(props.modifier.vars[key].min);
                 const maxStat = findStatByName(props.modifier.vars[key].max);
 
-                let replacement = `[${minStat.values.min}-${maxStat.values.max}]`;
-                if (minStat.values.min === maxStat.values.max) {
-                    replacement = minStat.values.min;
+                const minReplacement = formatStatRange(
+                    minStat.values.min,
+                    minStat.values.max,
+                );
+                const maxReplacement = formatStatRange(
+                    maxStat.values.min,
+                    maxStat.values.max,
+                );
+
+                let replacement = `${minReplacement} to ${maxReplacement}`;
+                if (minReplacement === maxReplacement) {
+                    replacement = minReplacement;
                 }
 
                 template = template.replace(
@@ -52,6 +61,10 @@ const translatedTemplate = computed(() => {
 
     return template;
 });
+
+const formatStatRange = (min, max) => {
+    return min === max ? min : `[${min}-${max}]`;
+};
 
 const findStatByName = (statName) => {
     return props.modifier.stats.find((d2stat) => d2stat.stat.name === statName);
