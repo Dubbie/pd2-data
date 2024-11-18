@@ -26,8 +26,9 @@ const isPlaceholder = (part) => part.startsWith('@') && part.endsWith('@');
 
 /**
  * Finds the stat in the modifier by its name and returns its range.
+ * Adds a check for fixed ranges where min and max are the same.
  * @param {string} placeholder - The placeholder string (e.g., "@stat_name@").
- * @returns {{ min: string, max: string }} - The range object for the stat.
+ * @returns {{ min: string, max: string, isFixed: boolean }} - The range object for the stat.
  */
 const getRangeByPlaceholder = (placeholder) => {
     const statName = placeholder.replaceAll('@', '');
@@ -35,10 +36,11 @@ const getRangeByPlaceholder = (placeholder) => {
 
     if (!d2stat) {
         console.warn(`Stat "${statName}" not found in modifier.`);
-        return { min: '0', max: '0' }; // Default fallback range
+        return { min: '0', max: '0', isFixed: true }; // Default fallback range
     }
 
-    return d2stat.values;
+    const { min, max } = d2stat.values;
+    return { min, max, isFixed: min === max };
 };
 
 /**
@@ -67,12 +69,20 @@ onMounted(() => {
             <!-- Render static text -->
             <p v-if="!isPlaceholder(part)" class="font-semibold">{{ part }}</p>
 
-            <!-- Render input for placeholders -->
-            <ModifierInput
-                v-else
-                v-model="exactValue"
-                :range="getRangeByPlaceholder(part)"
-            />
+            <!-- Check if range is fixed -->
+            <template v-else>
+                <p
+                    v-if="getRangeByPlaceholder(part).isFixed"
+                    class="font-semibold"
+                >
+                    {{ getRangeByPlaceholder(part).min }}
+                </p>
+                <ModifierInput
+                    v-else
+                    v-model="exactValue"
+                    :range="getRangeByPlaceholder(part)"
+                />
+            </template>
         </template>
     </div>
 </template>
