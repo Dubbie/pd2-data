@@ -2,7 +2,6 @@
 
 namespace App\Services\Property;
 
-use Exception;
 use JsonSerializable;
 
 class D2Modifier implements JsonSerializable
