@@ -9,36 +9,54 @@ const { modifier } = defineProps({
     },
 });
 
+// Reactive reference for exact value
 const exactValue = ref(null);
 
-const splitTemplate = () => {
-    const parts = modifier.template.split(/(@\w*@)/g);
-    return parts.filter((part) => part !== ''); // Remove empty parts;
-};
+/**
+ * Splits the template into parts: placeholders and static text.
+ * Example: "+@item_mindamage_percent@% Enhanced Damage" -> ["+", "@item_mindamage_percent@", "% Enhanced Damage"]
+ */
+const splitTemplate = () =>
+    modifier.template.split(/(@\w*@)/g).filter((part) => part !== '');
 
-const isPlaceholder = (part) => {
-    return part.includes('@');
-};
+/**
+ * Checks if a part is a placeholder (e.g., "@stat_name@").
+ */
+const isPlaceholder = (part) => part.startsWith('@') && part.endsWith('@');
 
+/**
+ * Finds the stat in the modifier by its name and returns its range.
+ * @param {string} placeholder - The placeholder string (e.g., "@stat_name@").
+ * @returns {{ min: string, max: string }} - The range object for the stat.
+ */
 const getRangeByPlaceholder = (placeholder) => {
     const statName = placeholder.replaceAll('@', '');
     const d2stat = findStatByName(statName);
 
-    return {
-        min: d2stat.values.min,
-        max: d2stat.values.max,
-    };
+    if (!d2stat) {
+        console.warn(`Stat "${statName}" not found in modifier.`);
+        return { min: '0', max: '0' }; // Default fallback range
+    }
+
+    return d2stat.values;
 };
 
-const findStatByName = (statName) => {
-    return modifier.stats.find((d2stat) => d2stat.stat.name === statName);
-};
+/**
+ * Finds a stat by its name within the modifier stats array.
+ * @param {string} statName - The name of the stat to find.
+ * @returns {Object} - The stat object if found.
+ */
+const findStatByName = (statName) =>
+    modifier.stats.find((d2stat) => d2stat.stat.name === statName);
 
+// Split the template into parts (placeholders and static text)
 const parts = splitTemplate();
 
+// Set the default exact value to the max value of the first stat on mount
 onMounted(() => {
-    if (modifier.stats[0].values.max) {
-        exactValue.value = modifier.stats[0].values.max;
+    const firstStat = modifier.stats[0]?.values;
+    if (firstStat?.max) {
+        exactValue.value = firstStat.max;
     }
 });
 </script>
@@ -46,7 +64,10 @@ onMounted(() => {
 <template>
     <div class="flex items-center gap-x-1">
         <template v-for="(part, index) in parts" :key="index">
+            <!-- Render static text -->
             <p v-if="!isPlaceholder(part)" class="font-semibold">{{ part }}</p>
+
+            <!-- Render input for placeholders -->
             <ModifierInput
                 v-else
                 v-model="exactValue"
