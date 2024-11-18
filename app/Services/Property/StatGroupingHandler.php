@@ -4,18 +4,7 @@ namespace App\Services\Property;
 
 class StatGroupingHandler
 {
-    private const GROUPS = [
-        'dmg_percent' => [
-            'stats' => ['item_mindamage_percent', 'item_maxdamage_percent'],
-            'priority' => 999,
-            'vars' => [
-                'dmg' => [
-                    'min' => 'item_mindamage_percent',
-                    'max' => 'item_maxdamage_percent'
-                ]
-            ]
-        ]
-    ];
+    private const GROUPS = [];
 
     public function group(array $processedStats)
     {
