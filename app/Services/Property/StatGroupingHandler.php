@@ -21,14 +21,19 @@ class StatGroupingHandler
         }
 
         // Handle groups
-        foreach ($groups as $groupName => $d2stats) {
-            $modifiers[] = new D2Modifier($groupName, $d2stats, self::GROUPS[$groupName]['vars']);
-        }
+        // foreach ($groups as $groupName => $d2stats) {
+        //   $modifiers[] = new D2Modifier($groupName, $d2stats, ,self::GROUPS[$groupName]['vars']);
+        // }
 
         // Handle standalone
         foreach ($standalone as $d2stat) {
-            $modifiers[] = new D2Modifier($d2stat->stat->name, [$d2stat]);
+            $modifiers[] = new D2Modifier($d2stat->stat->name, [$d2stat], $d2stat->stat->description->priority);
         }
+
+        // Order them
+        usort($modifiers, function ($a, $b) {
+            return $a->priority < $b->priority;
+        });
 
         return $modifiers;
     }

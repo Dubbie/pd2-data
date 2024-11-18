@@ -6,15 +6,17 @@ use JsonSerializable;
 
 class D2Modifier implements JsonSerializable
 {
-    private array $stats;
-    private string $name;
-    private array $vars;
-    private string $template;
+    public array $stats;
+    public string $name;
+    public array $vars;
+    public string $template;
+    public int $priority;
 
-    public function __construct(string $name, array $stats, array $vars = [])
+    public function __construct(string $name, array $stats, int $priority, array $vars = [])
     {
         $this->name = $name;
         $this->stats = $stats;
+        $this->priority = $priority;
         $this->vars = $vars;
         $this->template = $this->generateTemplate();
     }
@@ -25,6 +27,7 @@ class D2Modifier implements JsonSerializable
             'name' => $this->name,
             'stats' => $this->stats,
             'vars' => $this->vars,
+            'priority' => $this->priority,
             'template' => $this->template,
         ];
     }
