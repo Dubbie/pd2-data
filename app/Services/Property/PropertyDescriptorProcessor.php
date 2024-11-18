@@ -24,7 +24,9 @@ class PropertyDescriptorProcessor
         foreach ($propertyStats as $propertyStat) {
             $processed = $this->statProcessor->process($propertyStat, $this->descriptor);
             if ($processed) {
-                $processedStats[] = $processed;
+                foreach ($processed as $processedStat) {
+                    $processedStats[] = $processedStat;
+                }
             }
         }
 

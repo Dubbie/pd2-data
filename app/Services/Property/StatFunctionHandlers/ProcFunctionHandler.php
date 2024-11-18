@@ -9,7 +9,7 @@ use App\Services\Property\D2StatKeys;
 
 class ProcFunctionHandler implements StatFunctionHandlerInterface
 {
-    public function handle(PropertyDescriptor $descriptor, PropertyStat $propertyStat): D2Stat
+    public function handle(PropertyDescriptor $descriptor, PropertyStat $propertyStat): array
     {
         $values = [
             D2StatKeys::CHANCE_TO_PROC => $descriptor->min,
@@ -17,6 +17,6 @@ class ProcFunctionHandler implements StatFunctionHandlerInterface
             D2StatKeys::SKILL_ID => $descriptor->param,
         ];
 
-        return new D2Stat($propertyStat->stat, $values);
+        return [new D2Stat($propertyStat->stat, $values)];
     }
 }
