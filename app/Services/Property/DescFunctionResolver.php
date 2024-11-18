@@ -19,6 +19,7 @@ class DescFunctionResolver
             1 => new DescFunction1Handler(),
             2 => new DescFunction2Handler(),
             3 => new DescFunction3Handler(),
+            12 => new DescFunction1Handler(),
             15 => new DescFunction15Handler(),
         ];
     }
